@@ -7,7 +7,7 @@
     <title>Vanilla App Template</title>
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
-  <body>
+  <div>
     <div class="container">
       <form class="form">
         <label>
@@ -22,8 +22,14 @@
       </form>
 
       <ul class="gallery"></ul>
-
-      <spanc lass="loader">Loading</spanc>
+      <span class="loader">
+        <div class="loader-inner ball-pulse-sync">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </span>
+ 
     </div>
     <script type="module" src="./main.js"></script>
   </body>
