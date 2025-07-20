@@ -16,12 +16,14 @@ export function getImagesByQuery(query) {
   return axios
     .get(base_url, { params })
 
-    .then(response => response.data)
+    .then(response => {
+      const data = response.data;
+      if (!data.hits || data.hits.length === 0) {
+        throw new Error('No images found');
+      }
+      return data;
+    })
     .catch(error => {
-      console.log(
-        'Sorry, there are no images matching your search query. Please try again!',
-        error
-      );
       throw error;
     });
 }

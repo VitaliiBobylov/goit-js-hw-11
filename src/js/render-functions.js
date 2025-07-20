@@ -3,7 +3,6 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const galleryContainer = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
-
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
@@ -21,7 +20,7 @@ export function createMarkup(arr) {
         comments,
         downloads,
       }) => `
-        <li class="gallery-item">
+        <li class="photo-card">
           <a href="${largeImageURL}">
             <img src="${webformatURL}" alt="${tags}" />
           </a>
@@ -37,7 +36,15 @@ export function createMarkup(arr) {
     .join('');
 }
 
-export function renderGallery(arr) {
+export function renderEmptyMessage(message = 'No images found.') {
+  galleryContainer.innerHTML = `
+    <li style="grid-column: 1 / -1; text-align: center; font-size: 18px; color: #666;">
+      ${message}
+    </li>
+  `;
+}
+
+export function createGallery(arr) {
   const markup = createMarkup(arr);
   galleryContainer.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
