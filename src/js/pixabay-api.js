@@ -13,17 +13,22 @@ export function getImagesByQuery(query) {
     safesearch: true,
   };
 
-  return axios
-    .get(base_url, { params })
+  function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  return delay(2000).then(() => {
+    return axios
+      .get(base_url, { params })
 
-    .then(response => {
-      const data = response.data;
-      if (!data.hits || data.hits.length === 0) {
-        throw new Error('No images found');
-      }
-      return data;
-    })
-    .catch(error => {
-      throw error;
-    });
+      .then(response => {
+        const data = response.data;
+        if (!data.hits || data.hits.length === 0) {
+          throw new Error('No images found');
+        }
+        return data;
+      })
+      .catch(error => {
+        throw error;
+      });
+  });
 }
